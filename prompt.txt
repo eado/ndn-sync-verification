@@ -1,0 +1,34 @@
+#include <stdint.h> 
+#include <stdio.h> 
+#include <string.h> 
+#include <klee/klee.h> 
+#include <stdbool.h> 
+
+type enum {
+	STABLE,
+	SUPPRESSION
+} InternalState;
+
+typedef int[5] StateVector;
+
+typedef struct {
+	StateVector vector;
+	bool increase;
+} ModificationMsg;
+
+typedef struct {
+	StateVector vector;
+	InternalState state;
+} NodeState;
+
+// Function Description: (FILL IN)
+
+// Parameters:
+//  	current: The current state vector that is stored at the node (including internal state and state vector).
+//		msg: The message received by the node indicating how the state should update.
+// Return Value:
+//  	A NodeState reflecting the state of the NDN network node after it has processed the message it received.
+
+NodeState update_state(NodeState current, ModificationMsg msg) {
+	// IMPLEMENT ME
+}
