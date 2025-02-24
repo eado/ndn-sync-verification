@@ -2,9 +2,11 @@ import openai
 import sys
 import os
 
+api_key = open(os.path.join(os.getcwd(),"api_key.txt")) .read()
+
 class GPT4:
     def __init__(self, system_prompt, temperatrue=0.0):
-        openai.api_key = "<FILL IN API KEY>"
+        openai.api_key = api_key
         self.messages = list()
         self.temperature = temperatrue
         self.system_prompt = system_prompt

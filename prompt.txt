@@ -21,7 +21,15 @@ typedef struct {
 	InternalState state;
 } NodeState;
 
-// Function Description: (FILL IN)
+// Function Description: This function should consider the current NodeState and handle the message that it is given 
+// according to the NDN State Vector Sync protocol. Specifically, if the message tells the node to increase its own counter
+// (which will be the first index in the state vector), then the function should increase that index and return a message 
+// with an updated state vector. If the function receives an updated state vector in the message, it should update its own
+// state vector and then return a message with the updated state. Additionally, if the node receives a message that is out
+// of sync (has an index less than the one stored at the node), then the node should go to SUPPRESSION state and return
+// a message with its own state. Other details can be found in the provided context as well as Named Data Network State
+// Vector Sync algorithm resources.
+
 
 // Parameters:
 //  	current: The current state vector that is stored at the node (including internal state and state vector).
