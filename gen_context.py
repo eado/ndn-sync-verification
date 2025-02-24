@@ -14,11 +14,11 @@ Settings.chunk_overlap = 50
 
 
 loader = PyMuPDFReader()
-d1 = loader.load(file_path="./ndn-context.txt")
+# d1 = loader.load(file_path="./ndn-context.txt")
 
 d2 = SimpleWebPageReader(html_to_text=True).load_data([ "https://named-data.github.io/StateVectorSync/Specification.html" ])
 
-documents = [d1,d2]
+documents = [d2]
 
 index = SummaryIndex.from_documents(documents)
 
