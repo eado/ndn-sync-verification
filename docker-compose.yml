@@ -1,0 +1,33 @@
+networks:
+  ndn_compute_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.2.0/24
+
+services:
+  nfd:
+    build: ./cluster/NFD
+    volumes:
+       - ./cluster/NFD-config:/config
+    entrypoint: ["/usr/bin/nfd"]
+    command: ["--config", "/config/nfd.conf"]
+    container_name: forwarder
+    networks: [ndn_compute_net]
+
+  cpp:
+    build: ./cluster/SVS-CPP
+  # driver:
+  #   build: 
+  #     context: ./
+  #     dockerfile: ./cluster/driver/Dockerfile
+  #   container_name: driver1
+  #   networks:
+  #     ndn_compute_net:
+  #       ipv4_address: 192.168.1.10
+  #   ports:
+  #     - "5214:5214"
+  #   environment:
+  #     - APP_PREFIX=ndn-compute
+  #     - MANAGEMENT_PORT=5214
+
