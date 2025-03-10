@@ -15,19 +15,43 @@ services:
     container_name: forwarder
     networks: [ndn_compute_net]
 
+  # ndnd:
+  #   build: ./cluster/NDND
+  #   volumes:
+  #      - ./cluster/NFD-config:/config
+  #   command: ["fw", "run", "/config/yanfd.config.yml"]
+  #   container_name: forwarder
+  #   networks: [ndn_compute_net]
+
   cpp:
     build: ./cluster/SVS-CPP
-  # driver:
-  #   build: 
-  #     context: ./
-  #     dockerfile: ./cluster/driver/Dockerfile
-  #   container_name: driver1
-  #   networks:
-  #     ndn_compute_net:
-  #       ipv4_address: 192.168.1.10
-  #   ports:
-  #     - "5214:5214"
-  #   environment:
-  #     - APP_PREFIX=ndn-compute
-  #     - MANAGEMENT_PORT=5214
+    container_name: cpp
+    networks: [ndn_compute_net]
+    entrypoint: ["/ndn-svs/build/examples/core", "/cpp"]
+
+  go:
+    build: ./cluster/SVS-GO
+    container_name: go
+    networks: [ndn_compute_net]
+    entrypoint: ["./main", "/go"]
+
+  ts:
+    build: ./cluster/SVS-TS
+    container_name: ts
+    networks: [ndn_compute_net]
+    entrypoint: ["node", "build/main.js", "/ts", "--svs3"]
+
+  # py:
+  #   build: ./cluster/SVS-PY
+  #   container_name: py
+  #   networks: [ndn_compute_net]
+  #   working_dir: /ndn-python-svs
+  #   entrypoint: ["python", "examples/count.py", "-n", "/test2", "-gp", "/ndn/svs"]
+  #
+  # py2:
+  #   build: ./cluster/SVS-PY2
+  #   container_name: py2
+  #   networks: [ndn_compute_net]
+  #   entrypoint: ["python", "/python-ndn/examples/appv2/svs/sync_example.py"]
+
 

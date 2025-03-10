@@ -1,6 +1,6 @@
 [submodule "cluster/NFD"]
 	path = cluster/NFD
-	url = https://github.com/named-data/NFD.git
+	url = https://github.com/eado/NFD.git
 [submodule "cluster/SVS-CPP/ndn-svs"]
 	path = cluster/SVS-CPP/ndn-svs
-	url = https://github.com/named-data/ndn-svs/
+	url = https://github.com/eado/ndn-svs/

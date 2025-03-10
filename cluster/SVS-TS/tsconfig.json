@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es2017",
+    "module": "nodenext",
+    "outDir": "build"
+  },
+  "include": [
+    "**/*"
+  ]
+}

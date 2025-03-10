@@ -1,0 +1,23 @@
+{
+  "name": "svs-ts",
+  "version": "1.0.0",
+  "main": "build/main.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@ndn/cli-common": "^0.0.20250307",
+    "@ndn/svs": "^0.0.20250307",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/yargs": "^17.0.33",
+    "tsc": "^2.0.4",
+    "typescript": "^5.8.2"
+  }
+}
