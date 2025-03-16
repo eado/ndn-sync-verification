@@ -3,3 +3,4 @@ cluster/NFD-config/.ndn
 node_modules
 build
 main
+cluster/SVS-PY*
