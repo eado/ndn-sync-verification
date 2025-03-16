@@ -2,3 +2,4 @@ api_key.txt
 cluster/NFD-config/.ndn
 node_modules
 build
+main

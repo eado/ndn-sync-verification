@@ -27,19 +27,19 @@ services:
     build: ./cluster/SVS-CPP
     container_name: cpp
     networks: [ndn_compute_net]
-    entrypoint: ["/ndn-svs/build/examples/core", "/cpp"]
+    entrypoint: ["/ndn-svs/build/examples/core"]
 
   go:
     build: ./cluster/SVS-GO
     container_name: go
     networks: [ndn_compute_net]
-    entrypoint: ["./main", "/go"]
+    entrypoint: ["./main"]
 
   ts:
     build: ./cluster/SVS-TS
     container_name: ts
     networks: [ndn_compute_net]
-    entrypoint: ["node", "build/main.js", "/ts", "--svs3"]
+    entrypoint: ["node", "build/main.js"]
 
   # py:
   #   build: ./cluster/SVS-PY

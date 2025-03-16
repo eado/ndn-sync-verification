@@ -3,14 +3,15 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	enc "github.com/named-data/ndnd/std/encoding"
 	"github.com/named-data/ndnd/std/engine"
+	"github.com/named-data/ndnd/std/engine/face"
 	"github.com/named-data/ndnd/std/log"
 	"github.com/named-data/ndnd/std/object"
 	"github.com/named-data/ndnd/std/sync"
-    "github.com/named-data/ndnd/std/engine/face"
 )
 
 func main() {
@@ -20,21 +21,21 @@ func main() {
 	//   ndnd fw strategy-set prefix=/ndn/svs strategy=/localhost/nfd/strategy/multicast
 	//
 
-	if len(os.Args) < 2 {
-		fmt.Fprintf(os.Stderr, "Usage: %s <name>", os.Args[0])
-		os.Exit(1)
-	}
+	// if len(os.Args) < 2 {
+	// 	fmt.Fprintf(os.Stderr, "Usage: %s <name>", os.Args[0])
+	// 	os.Exit(1)
+	// }
 
 	// Parse command line arguments
-	name, err := enc.NameFromStr(os.Args[1])
-	if err != nil {
-		log.Fatal(nil, "Invalid node ID", "name", os.Args[1])
-		return
-	}
+	// name, err := enc.NameFromStr(os.Args[1])
+	// if err != nil {
+	// 	log.Fatal(nil, "Invalid node ID", "name", os.Args[1])
+	// 	return
+	// }
 
 	// Create a new engine
-    app := engine.NewBasicEngine(face.NewStreamFace("tcp", "forwarder:6363", false))
-	err = app.Start()
+	app := engine.NewBasicEngine(face.NewStreamFace("tcp", "forwarder:6363", false))
+	err := app.Start()
 	if err != nil {
 		log.Fatal(nil, "Unable to start engine", "err", err)
 		return
@@ -57,7 +58,9 @@ func main() {
 		Client:      client,
 		GroupPrefix: group,
 		OnUpdate: func(ssu sync.SvSyncUpdate) {
-			log.Info(nil, "Received update", "update", ssu)
+			// log.Info(nil, "Received update", "update", ssu)
+			fmt.Printf("%s=%d\n", ssu.Name, ssu.High)
+            
 		},
 	})
 
@@ -75,11 +78,18 @@ func main() {
 		return
 	}
 
+    arr := [5]string{"/A", "/B", "/C", "/D", "/E"}
+
+    for index, val := range arr {
+        aname, _ := enc.NameFromStr(val)
+	    anum, _ := strconv.Atoi(os.Args[index + 1])
+	    svsync.SetSeqNo(aname, uint64(anum)) 
+    }
+
 	// Publish new sequence number every second
 	ticker := time.NewTicker(3 * time.Second)
 
 	for range ticker.C {
-		seq := svsync.IncrSeqNo(name)
-		log.Info(nil, "Published new sequence number", "seq", seq)
+        fmt.Printf("svsync: %v\n", svsync);
 	}
 }
